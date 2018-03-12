@@ -32,7 +32,7 @@ export class BurgerIngredient extends Component {
             default:
                 this.ingredient = null;
         }
-        console.log(this.ingredient);
+
         return this.ingredient;
     }
 }
