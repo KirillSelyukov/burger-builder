@@ -1,5 +1,6 @@
 import React from 'react';
 import { Aux } from '../../../hoc/Auxiliary';
+import { Button } from '../../UI/Button';
 
 export const OrederSummary = (props) => {
     const integredientSummary = Object.keys(props.ingredients)
