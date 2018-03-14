@@ -18,6 +18,8 @@ export const OrederSummary = (props) => {
                 {integredientSummary}
             </ul>
             <p>Continuie to Checkout?</p>
+            <Button className='Danger' clicked={props.purchaseCancelled}>CANCEL</Button>
+            <Button className='Success' clicked={props.purchaseContinued}>CONTINUE</Button>
         </Aux>
     )
 };

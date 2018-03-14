@@ -7,4 +7,4 @@ export const Button = (props) => (
         onClick={props.clicked}>
         {props.children}
     </button>
-)
+);
