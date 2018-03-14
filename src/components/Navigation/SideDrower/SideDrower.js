@@ -6,7 +6,9 @@ import './SideDrower.css';
 export const SideDrower = (props) => {
     return (
         <div className='SideDrower'>
-            <Logo />
+            <div className='Side-Drawer-Logo'>
+                <Logo />
+            </div>
             <nav>
                 <NavigationItems />
             </nav>
