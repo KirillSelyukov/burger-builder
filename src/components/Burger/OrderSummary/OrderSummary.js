@@ -17,6 +17,7 @@ export const OrederSummary = (props) => {
             <ul>
                 {integredientSummary}
             </ul>
+            <p>Total Price: <strong>{props.price.toFixed(2)}</strong></p>
             <p>Continuie to Checkout?</p>
             <Button className='Danger' clicked={props.purchaseCancelled}>CANCEL</Button>
             <Button className='Success' clicked={props.purchaseContinued}>CONTINUE</Button>
