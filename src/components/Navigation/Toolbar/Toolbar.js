@@ -9,7 +9,6 @@ export const Toolbar = (props) => (
         <div className='Tolbar-Logo'>
             <Logo />
         </div>
-            {/* <Logo /> */}
         <nav className='DesktopOnly'>
             <NavigationItems />
         </nav>
