@@ -77,11 +77,12 @@ export class BurgerBuilder extends Component {
         const disabledInfo = {
             ...this.state.ingredients
         }
+
         for (let key in disabledInfo) {
             disabledInfo[key] = disabledInfo[key] <= 0;
         }
-        return (
 
+        return (
             <Aux>
                 <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
                     <OrederSummary
