@@ -15,6 +15,7 @@ class ContactData extends Component {
 
     render() {
         return (
+
             <div className='ContactData'>
                 <h4>Enter Your Contact Data</h4>
                 <form>
