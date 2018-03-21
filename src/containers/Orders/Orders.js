@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import axios from '../../axios-orders';
 
-import {Spinner} from '../../components/UI/Spinner';
+import axios from '../../axios-orders';
+import { Spinner } from '../../components/UI/Spinner';
 import Order from '../../components/Order/Order';
 import withErrorHandler from '../../hoc/WithErrorHandler';
 
@@ -10,6 +10,7 @@ class Orders extends Component {
         loading: true,
         orders: []
     }
+
     componentDidMount = () => {
         axios.get('/orders.json')
             .then(res => {
@@ -20,7 +21,7 @@ class Orders extends Component {
                         id: key
                     });
                 }
-                this.setState({ loading: false })
+                this.setState({ loading: false, orders: fetchedOrders })
             })
             .catch(err => {
                 this.setState({ loading: false })
@@ -28,14 +29,18 @@ class Orders extends Component {
     }
 
     render() {
-        if(this.state.loading){
+        if (this.state.loading) {
             return <Spinner />;
         }
 
         return (
             <div>
-                <Order />
-                <Order />
+                {this.state.orders.map(order => (
+                    <Order
+                        key={order.id}
+                        ingredients={order.ingredients}
+                        price={order.price} />
+                ))}
             </div>
         );
     }
