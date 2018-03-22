@@ -66,13 +66,23 @@ class ContactData extends Component {
 
     orderHandler = (event) => {
         event.preventDefault();
-        this.setState({ loading: true });
-        axios.post('/orders.json', this.state.order)
+        const formData = {};
+        for (let el in this.state.orderForm) {
+            formData[el] = this.state.orderForm[el].value;
+        }
+        const order = {
+            ingredients: this.props.ingredients,
+            price1: this.props.price,
+            orderData: formData,
+        }
+
+        axios.post('/orders.json', order)
             .then(response => {
                 this.setState({ loading: false });
                 this.props.history.push('/');
             })
             .catch(error => this.setState({ loading: false }))
+        this.setState({ loading: true });
     }
 
     inputChangedHandler = (event, identifier) => {
@@ -80,7 +90,7 @@ class ContactData extends Component {
         const updatedformEl = { ...updatedOrderForm[identifier] };
         updatedformEl.value = event.target.value;
         updatedOrderForm[identifier] = updatedformEl;
-        this.setState({orderForm: updatedOrderForm});
+        this.setState({ orderForm: updatedOrderForm });
     }
 
     render() {
@@ -97,7 +107,7 @@ class ContactData extends Component {
         }
 
         let form = (
-            <form>
+            <form onSubmit={this.orderHandler}>
                 {formElements.map(el => {
                     return <Input
                         key={el.id}
@@ -107,7 +117,7 @@ class ContactData extends Component {
                         changed={(event) => this.inputChangedHandler(event, el.id)} />
                 })}
 
-                <Button className='Success' clicked={this.orderHandler}>ORDER</Button>
+                <Button className='Success'>ORDER</Button>
             </form>
         );
 
