@@ -75,6 +75,14 @@ class ContactData extends Component {
             .catch(error => this.setState({ loading: false }))
     }
 
+    inputChangedHandler = (event, identifier) => {
+        const updatedOrderForm = { ...this.state.orderForm };
+        const updatedformEl = { ...updatedOrderForm[identifier] };
+        updatedformEl.value = event.target.value;
+        updatedOrderForm[identifier] = updatedformEl;
+        this.setState({orderForm: updatedOrderForm});
+    }
+
     render() {
         if (this.state.loading) {
             return <Spinner />
@@ -95,14 +103,13 @@ class ContactData extends Component {
                         key={el.id}
                         elementType={el.config.elementType}
                         elementConfig={el.config.elementConfig}
-                        value={el.config.value} />
+                        value={el.config.value}
+                        changed={(event) => this.inputChangedHandler(event, el.id)} />
                 })}
 
                 <Button className='Success' clicked={this.orderHandler}>ORDER</Button>
             </form>
         );
-
-
 
         return (
             <div className='ContactData'>
