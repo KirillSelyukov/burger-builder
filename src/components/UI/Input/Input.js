@@ -4,7 +4,7 @@ import './Input.css';
 const input = (props) => {
     let inputElement = null;
     const inputClasses = ['InputElement']
-    if (props.shouldvalidate && props.invalid) {
+    if (props.shouldvalidate && props.invalid && props.touched) {
         inputClasses.push('Invalid')
     }
     switch (props.elementType) {

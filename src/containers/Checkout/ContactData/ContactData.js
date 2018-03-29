@@ -21,6 +21,7 @@ class ContactData extends Component {
                     required: true
                 },
                 valid: false,
+                touched: false
 
             },
             street: {
@@ -33,7 +34,8 @@ class ContactData extends Component {
                 validation: {
                     required: true
                 },
-                valid: false
+                valid: false,
+                touched: false
             },
             zipCode: {
                 elementType: 'input',
@@ -47,7 +49,8 @@ class ContactData extends Component {
                     minLength: 5,
                     maxLength: 5
                 },
-                valid: false
+                valid: false,
+                touched: false
             },
             country: {
                 elementType: 'input',
@@ -59,7 +62,8 @@ class ContactData extends Component {
                 validation: {
                     required: true
                 },
-                valid: false
+                valid: false,
+                touched: false
             },
             email: {
                 elementType: 'email',
@@ -71,7 +75,8 @@ class ContactData extends Component {
                 validation: {
                     required: true
                 },
-                valid: false
+                valid: false,
+                touched: false
             },
             deliveryMethod: {
                 elementType: 'select',
@@ -128,7 +133,7 @@ class ContactData extends Component {
 
         updatedformEl.value = event.target.value;
         updatedformEl.valid = this.checkValidity(updatedformEl.value, updatedformEl.validation);
-        console.log(updatedformEl)
+        updatedformEl.touched = true;
 
         updatedOrderForm[identifier] = updatedformEl;
         this.setState({ orderForm: updatedOrderForm });
@@ -157,6 +162,7 @@ class ContactData extends Component {
                         value={el.config.value}
                         invalid={!el.config.valid}
                         shouldvalidate={el.config.validation}
+                        touched={el.config.touched}
                         changed={(event) => this.inputChangedHandler(event, el.id)} />
                 })}
 
