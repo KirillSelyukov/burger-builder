@@ -20,6 +20,15 @@ class BurgerBuilder extends Component {
         error: false,
     }
 
+    componentDidMount = () => {
+        console.log(this.props);
+        // axios.get('/ingredients.json')
+        //     .then(({ data }) => {
+        //         this.setState({ ingredients: data })
+        //     })
+        //     .catch(error => { this.setState({ error: true }) });
+    }
+
     updatePurchaseState = (ingredients) => {
         const sum = Object.keys(ingredients)
             .map(igKey => {
