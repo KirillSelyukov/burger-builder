@@ -13,13 +13,15 @@ class Checkout extends Component {
     checkoutContinuedHandler = () => {
         this.props.history.replace('/checkout/contact-data');
     }
-
     render() {
         console.log(this.props.ings);
         let summary = <Redirect to='/' />
         if (this.props.ings) {
+            const purchasedRedirect = this.props.purchased ? <Redirect to='/' /> : null;
+
             summary = (
                 <React.Fragment>
+                    {purchasedRedirect}
                     <CheckoutSummary
                         ingredients={this.props.ings}
                         checkoutCancelled={this.checkoutCancelledHandler}
@@ -37,7 +39,8 @@ class Checkout extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        ings: state.burgerBuilder.ingredients
+        ings: state.burgerBuilder.ingredients,
+        purchased: state.order.purchased
     }
 }
 
