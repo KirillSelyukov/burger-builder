@@ -8,6 +8,7 @@ export const purchaseBurgerSuccess = (id, orderData) => {
         orderData: orderData
     }
 }
+
 export const purchaseBurgerFail = (error) => {
     return {
         type: actions.PURCHASE_BURGER_FAIL,
@@ -30,6 +31,46 @@ export const purchaseBurger = (orderData) => {
             })
             .catch(error => {
                 dispatch(purchaseBurgerFail(error));
+            })
+    }
+}
+
+export const fetchOrdersSuccess = (orders) => {
+    return {
+        type: actions.FETCH_ORDERS_SUCCESS,
+        orders: orders
+    }
+}
+
+export const fetchOrdersFail = (error) => {
+    return {
+        type: actions.FETCH_ORDERS_FAIL,
+        error: error
+    }
+}
+
+export const fetchOrdersStart = () => {
+    return {
+        type: actions.FETCH_ORDERS_START
+    }
+}
+
+export const fetchOrders = () => {
+    return dispatch => {
+        dispatch(fetchOrdersStart());
+        axios.get('/orders.json')
+            .then(res => {
+                const fetchedOrders = [];
+                for (let key in res.data) {
+                    fetchedOrders.push({
+                        ...res.data[key],
+                        id: key
+                    });
+                }
+                dispatch(fetchOrdersSuccess(fetchedOrders))
+            })
+            .catch(error => {
+                dispatch(fetchOrdersFail(error))
             })
     }
 }
