@@ -96,7 +96,6 @@ class ContactData extends Component {
             },
         },
         formIsValid: false,
-        loading: false,
     }
     checkValidity(value, rules) {
         let isValid = true;
@@ -146,7 +145,7 @@ class ContactData extends Component {
     }
 
     render() {
-        if (this.state.loading) {
+        if (this.props.loading) {
             return <Spinner />
         }
         const formElements = [];
@@ -187,15 +186,15 @@ class ContactData extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        ings: state.ingredients,
-        price: state.totalPrice
-
-    }
+        ings: state.burgerBuilder.ingredients,
+        price: state.burgerBuilder.totalPrice,
+        loading: state.order.loading
+    };
 }
 const mapDistpatchToProps = (dispatch) => {
     return {
-        onOrderBurger: (orderData) => dispatch(orderDispatcher.purchaseBurgerStart(orderData))
-    }
+        onOrderBurger: (orderData) => dispatch(orderDispatcher.purchaseBurger(orderData))
+    };
 }
 
 export default connect(mapStateToProps, mapDistpatchToProps)(withErrorHandler(ContactData, axios));
