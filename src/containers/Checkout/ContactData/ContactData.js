@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import axios from '../../../axios-orders';
 import { Button } from '../../../components/UI/Button';
 import { Spinner } from '../../../components/UI/Spinner';
-import Input from '../../../components/UI/Input/Input';
+import {Input} from '../../../components/UI/Input';
 
 import * as orderDispatcher from '../../../store/actions';
 import withErrorHandler from '../../../hoc/WithErrorHandler';
