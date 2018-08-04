@@ -9,12 +9,14 @@ import App from './App';
 import './index.css';
 import burgerBuilderReducer from './store/reducers/burgerBuilder';
 import orderRuducer from './store/reducers/order';
+import authRuducer from './store/reducers/auth';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
     burgerBuilder: burgerBuilderReducer,
-    order: orderRuducer
+    order: orderRuducer,
+    auth: authRuducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
