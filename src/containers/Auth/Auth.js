@@ -103,6 +103,8 @@ class Auth extends Component {
                     {form}
                     <Button className='Success'>Submit</Button>
                 </form>
+                <Button className='Danger'>SWITCH TO SIGNIN</Button>
+
             </div>
         )
 
