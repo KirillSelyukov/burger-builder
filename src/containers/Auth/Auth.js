@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Input } from '../../components/UI/Input';
 import { Button } from '../../components/UI/Button';
+import { Spinner } from '../../components/UI/Spinner';
 import * as actions from '../../store/actions';
 
 import './Auth.css';
@@ -104,27 +105,38 @@ class Auth extends Component {
                 shouldvalidate={el.config.validation}
                 touched={el.config.touched}
                 changed={(event) => this.inputChangedHandler(event, el.id)} />
-        ))
+        ));
 
-        return (
+        let errorMessage = null;
+        if (this.props.error) {
+            errorMessage = (<p>{this.props.error.message}</p>);
+        }
+        const spiner = <Spinner />;
+        const authForm = (
             <div className='Auth'>
+                {errorMessage}
                 <form onSubmit={this.submitHandler}>
                     {form}
                     <Button className='Success'>Submit</Button>
                 </form>
                 <Button clicked={this.switchAuthModeHandler} className='Danger'>SWITCH TO {this.state.isSignup ? 'SIGNIN' : 'SIGNUP'}</Button>
-
             </div>
-        )
+        );
 
+        return this.props.loading ? spiner : authForm;
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup))
     }
-
+}
+const mapStateToProps = state => {
+    return {
+        loading: state.auth.loading,
+        error: state.auth.error
+    }
 }
 
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
