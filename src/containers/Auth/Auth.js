@@ -5,6 +5,8 @@ import { Button } from '../../components/UI/Button';
 import { Spinner } from '../../components/UI/Spinner';
 import * as actions from '../../store/actions';
 
+import { Redirect } from 'react-router-dom';
+
 import './Auth.css';
 
 class Auth extends Component {
@@ -106,7 +108,10 @@ class Auth extends Component {
                 touched={el.config.touched}
                 changed={(event) => this.inputChangedHandler(event, el.id)} />
         ));
-
+        let authRedirect = null;
+        if (this.props.isAuthenticated) {
+            authRedirect = <Redirect to='/' />;
+        }
         let errorMessage = null;
         if (this.props.error) {
             errorMessage = (<p>{this.props.error.message}</p>);
@@ -114,6 +119,7 @@ class Auth extends Component {
         const spiner = <Spinner />;
         const authForm = (
             <div className='Auth'>
+                {authRedirect}
                 {errorMessage}
                 <form onSubmit={this.submitHandler}>
                     {form}
@@ -134,7 +140,8 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
-        error: state.auth.error
+        error: state.auth.error,
+        isAuthenticated: state.auth.token !== null
     }
 }
 
