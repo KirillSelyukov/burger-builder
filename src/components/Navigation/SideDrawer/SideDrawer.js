@@ -9,9 +9,10 @@ import './SideDrawer.css';
 export const SideDrawer = (props) => {
     let attachedClasses = ['SideDrawer', 'Close'];
 
-    if(props.open){
+    if (props.open) {
         attachedClasses = ['SideDrawer', 'Open'];
     }
+    console.log('SideDrawer: ',props)
 
     return (
         <Aux>
@@ -21,7 +22,7 @@ export const SideDrawer = (props) => {
                     <Logo />
                 </div>
                 <nav>
-                    <NavigationItems />
+                    <NavigationItems isAuthenticated={props.isAuth} />
                 </nav>
             </div>
         </Aux>
