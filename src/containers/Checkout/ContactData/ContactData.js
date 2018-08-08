@@ -8,6 +8,7 @@ import { Input } from '../../../components/UI/Input';
 
 import * as orderDispatcher from '../../../store/actions';
 import withErrorHandler from '../../../hoc/WithErrorHandler';
+import { updateObject } from '../../../shared/utility';
 
 import './ContactData.css';
 
@@ -128,14 +129,16 @@ class ContactData extends Component {
     }
 
     inputChangedHandler = (event, identifier) => {
-        const updatedOrderForm = { ...this.state.orderForm };
-        const updatedformEl = { ...updatedOrderForm[identifier] };
 
-        updatedformEl.value = event.target.value;
-        updatedformEl.valid = this.checkValidity(updatedformEl.value, updatedformEl.validation);
-        updatedformEl.touched = true;
 
-        updatedOrderForm[identifier] = updatedformEl;
+        const updatedformEl = updateObject(this.state.orderForm[identifier], {
+            value: event.target.value,
+            valid: this.checkValidity(event.target.value, this.state.orderForm[identifier].validation),
+            touched: true
+        });
+        const updatedOrderForm = updateObject(this.state.orderForm,{
+            [identifier]:updatedformEl
+        });
 
         let formIsValid = true;
         for (let key in updatedOrderForm) {

@@ -31,7 +31,6 @@ class App extends Component {
           <Route path='/orders' exact component={Orders} />
           <Route path='/logout' exact component={Logout} />
           <Redirect to='/' />
-
         </Switch>
       );
 
