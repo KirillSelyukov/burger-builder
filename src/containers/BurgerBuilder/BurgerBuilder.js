@@ -12,7 +12,7 @@ import withErrorHandler from '../../hoc/WithErrorHandler/withErrorHandler';
 
 import * as actions from '../../store/actions';
 
-class BurgerBuilder extends Component {
+export class BurgerBuilder extends Component {
     state = {
         purchasable: false,
         purchasing: false,
@@ -117,5 +117,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-const BBuilder = connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(BurgerBuilder, axios));
-export { BBuilder as BurgerBuilder };
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(BurgerBuilder, axios));
