@@ -63,12 +63,8 @@ export const checkAuthTimeout = expirationTime => {
 };
 
 export const logout = () => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('expirationDate');
-  localStorage.removeItem('userId');
-
   return {
-    type: actionTypes.AUTH_LOGOUT
+    type: actionTypes.AUTH_INITIATE_LOGOUT
   };
 };
 
@@ -83,7 +79,7 @@ export const authCheckState = () => {
   return dispatch => {
     const token = localStorage.getItem('token');
     if (!token) {
-      //dispatch(logout());
+      dispatch(logout());
     } else {
       const expirationDate = new Date(localStorage.getItem('expirationDate'));
       if (expirationDate > new Date()) {
@@ -95,7 +91,7 @@ export const authCheckState = () => {
           )
         );
       } else {
-        // dispatch(logout());
+        dispatch(logout());
       }
     }
   };

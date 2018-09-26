@@ -11,7 +11,7 @@ import './index.css';
 import burgerBuilderReducer from './store/reducers/burgerBuilder';
 import orderRuducer from './store/reducers/order';
 import authRuducer from './store/reducers/auth';
-import { logoutSaga } from './sagas/auth';
+import { watchAuth } from './sagas';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const sagaMiddleware = createSagaMiddleware();
@@ -26,7 +26,8 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk, sagaMiddleware))
 );
 
-sagaMiddleware.run(logoutSaga);
+sagaMiddleware.run(watchAuth);
+
 const app = (
   <Provider store={store}>
     <BrowserRouter>
