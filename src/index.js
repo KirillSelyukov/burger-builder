@@ -11,7 +11,7 @@ import './index.css';
 import burgerBuilderReducer from './store/reducers/burgerBuilder';
 import orderRuducer from './store/reducers/order';
 import authRuducer from './store/reducers/auth';
-import { watchAuth, watchBurgerBuilder } from './sagas';
+import { watchAuth, watchBurgerBuilder, watchOrder } from './sagas';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const sagaMiddleware = createSagaMiddleware();
@@ -28,6 +28,7 @@ const store = createStore(
 
 sagaMiddleware.run(watchAuth);
 sagaMiddleware.run(watchBurgerBuilder);
+sagaMiddleware.run(watchOrder);
 
 const app = (
   <Provider store={store}>
